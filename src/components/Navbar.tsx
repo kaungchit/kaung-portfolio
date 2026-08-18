@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FileText, Download, Menu, X, Mail, Phone, ExternalLink, ArrowUpRight } from 'lucide-react';
 import { developerProfile } from '../data/portfolioData';
 import { downloadResumePdf } from '../utils/resumeDownload';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface NavbarProps {
   onOpenResume: () => void;
@@ -53,16 +54,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, activeSection }) =
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, '#hero')}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2.5 group"
           >
-            <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-sm group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
-              KC
-            </div>
+            <ProfileAvatar size="sm" showStatus={false} />
             <div>
-              <div className="font-bold text-white text-base tracking-tight group-hover:text-cyan-300 transition-colors">
+              <div className="font-bold text-white text-sm sm:text-base tracking-tight group-hover:text-cyan-300 transition-colors">
                 {developerProfile.name}
               </div>
-              <div className="text-[11px] text-slate-400 font-medium">
+              <div className="text-[11px] text-slate-400 font-medium hidden sm:block">
                 Senior Full Stack Developer
               </div>
             </div>

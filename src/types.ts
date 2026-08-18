@@ -20,6 +20,7 @@ export interface DeveloperProfile {
   yearsExperience: number;
   projectsCompleted: number;
   technologiesCount: number;
+  avatarUrl?: string;
   socials: SocialLinks;
   education: Array<{
     degree: string;

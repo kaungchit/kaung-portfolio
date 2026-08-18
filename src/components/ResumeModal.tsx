@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { X, Download, Printer, Mail, Phone, MapPin, Globe, ExternalLink, Briefcase, GraduationCap, Code2, Check, FileText } from 'lucide-react';
 import { developerProfile, experienceData, skillCategories } from '../data/portfolioData';
 import { downloadResumePdf, downloadResumePlainText } from '../utils/resumeDownload';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -78,16 +79,19 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           
           {/* Header Info */}
           <div className="flex flex-col md:flex-row md:items-start justify-between pb-6 border-b border-slate-800 gap-4">
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                {developerProfile.name}
-              </h1>
-              <p className="text-cyan-400 font-medium text-base mt-1">
-                {developerProfile.title}
-              </p>
-              <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
-                5+ years experience architecting and delivering high-performance web applications using Laravel, React, Vue.js, and Docker.
-              </p>
+            <div className="flex items-start gap-4">
+              <ProfileAvatar size="lg" showStatus={false} className="shrink-0 hidden sm:block" />
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  {developerProfile.name}
+                </h1>
+                <p className="text-cyan-400 font-medium text-base mt-1">
+                  {developerProfile.title}
+                </p>
+                <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
+                  5+ years experience architecting and delivering high-performance web applications using Laravel, React, Vue.js, and Docker.
+                </p>
+              </div>
             </div>
 
             <div className="space-y-1.5 text-xs text-slate-300 bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 shrink-0">

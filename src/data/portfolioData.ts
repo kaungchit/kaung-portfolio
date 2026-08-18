@@ -17,6 +17,7 @@ export const developerProfile: DeveloperProfile = {
   yearsExperience: 5,
   projectsCompleted: 25,
   technologiesCount: 15,
+  avatarUrl: "/profile.jpg",
   socials: {
     email: "airforceman.rr9@gmail.com",
     phone: "+95 9445863784",

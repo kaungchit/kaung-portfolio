@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { developerProfile } from '../data/portfolioData';
 import { Download, FileText, ArrowRight, Mail, Phone, Github, Linkedin, Check, Copy, Sparkles, MapPin, Briefcase, Code2, Globe } from 'lucide-react';
 import { downloadResumePdf } from '../utils/resumeDownload';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface HeroProps {
   onOpenResume: () => void;
@@ -133,28 +134,27 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
 
           </div>
 
-          {/* Right Column: Clean Profile Highlights Card */}
+          {/* Right Column: Clean Profile Highlights Card with Photo */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-gradient-to-b from-[#121722] to-[#0D1017] border border-slate-700/70 p-6 sm:p-7 shadow-2xl space-y-6">
+            <div className="rounded-3xl bg-gradient-to-b from-[#121722] to-[#0D1017] border border-slate-700/70 p-6 sm:p-7 shadow-2xl space-y-6">
               
-              {/* Profile Card Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-lg">
-                    KC
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-white">
+              {/* Profile Card Header with Photo */}
+              <div className="flex items-center gap-4 pb-5 border-b border-slate-800">
+                <ProfileAvatar size="lg" showStatus={true} allowUpload={true} />
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-white">
                       {developerProfile.name}
                     </h3>
-                    <p className="text-xs text-cyan-400 font-medium">
-                      {developerProfile.title}
-                    </p>
+                  </div>
+                  <p className="text-xs text-cyan-400 font-semibold">
+                    {developerProfile.title}
+                  </p>
+                  <div className="flex items-center gap-1 text-[11px] text-slate-400 pt-0.5">
+                    <MapPin className="w-3 h-3 text-slate-500 shrink-0" />
+                    <span className="truncate max-w-[200px]">{developerProfile.location}</span>
                   </div>
                 </div>
-                <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-                  5+ Yrs Exp
-                </span>
               </div>
 
               {/* Core Strengths */}

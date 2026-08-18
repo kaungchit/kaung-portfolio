@@ -2,6 +2,7 @@ import React from 'react';
 import { developerProfile } from '../data/portfolioData';
 import { Download, GraduationCap, Globe, CheckCircle2, ShieldCheck, Cpu, Terminal, ArrowUpRight } from 'lucide-react';
 import { downloadResumePdf } from '../utils/resumeDownload';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface AboutProps {
   onOpenResume: () => void;
@@ -26,6 +27,18 @@ export const About: React.FC<AboutProps> = ({ onOpenResume }) => {
           
           {/* Left Column: Bio & Core Philosophy */}
           <div className="lg:col-span-7 space-y-6">
+            <div className="flex items-center gap-4 pb-2">
+              <ProfileAvatar size="md" showStatus={true} allowUpload={true} />
+              <div>
+                <h3 className="text-base font-bold text-white">
+                  {developerProfile.name}
+                </h3>
+                <p className="text-xs text-cyan-400 font-medium">
+                  {developerProfile.title} • {developerProfile.location}
+                </p>
+              </div>
+            </div>
+
             <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
               <p>
                 I am a <strong>Senior Full Stack Developer</strong> with over 5 years of practical experience building, modernizing, and scaling enterprise web applications. My core expertise centers on <strong>Laravel, PHP 8+, React, Vue.js, MySQL, Redis, and Docker</strong>.

@@ -9,6 +9,7 @@ import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
+import { AvatarProvider } from './context/AvatarContext';
 
 export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -38,33 +39,35 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0B0E14] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
-      
-      {/* Navigation */}
-      <Navbar
-        onOpenResume={() => setIsResumeOpen(true)}
-        activeSection={activeSection}
-      />
+    <AvatarProvider>
+      <div className="min-h-screen bg-[#0B0E14] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+        
+        {/* Navigation */}
+        <Navbar
+          onOpenResume={() => setIsResumeOpen(true)}
+          activeSection={activeSection}
+        />
 
-      {/* Main Content Flow */}
-      <main>
-        <Hero onOpenResume={() => setIsResumeOpen(true)} />
-        <About onOpenResume={() => setIsResumeOpen(true)} />
-        <Experience />
-        <Projects />
-        <TechStack />
-        <Testimonials />
-        <Contact />
-      </main>
+        {/* Main Content Flow */}
+        <main>
+          <Hero onOpenResume={() => setIsResumeOpen(true)} />
+          <About onOpenResume={() => setIsResumeOpen(true)} />
+          <Experience />
+          <Projects />
+          <TechStack />
+          <Testimonials />
+          <Contact />
+        </main>
 
-      {/* Footer */}
-      <Footer onOpenResume={() => setIsResumeOpen(true)} />
+        {/* Footer */}
+        <Footer onOpenResume={() => setIsResumeOpen(true)} />
 
-      {/* Resume Document Viewer Modal */}
-      <ResumeModal
-        isOpen={isResumeOpen}
-        onClose={() => setIsResumeOpen(false)}
-      />
-    </div>
+        {/* Resume Document Viewer Modal */}
+        <ResumeModal
+          isOpen={isResumeOpen}
+          onClose={() => setIsResumeOpen(false)}
+        />
+      </div>
+    </AvatarProvider>
   );
 }
