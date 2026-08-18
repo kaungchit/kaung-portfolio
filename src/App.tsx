@@ -2,51 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { TechStack } from './components/TechStack';
-import { Projects } from './components/Projects';
 import { Experience } from './components/Experience';
-import { ArchitecturePlayground } from './components/ArchitecturePlayground';
-import { Terminal } from './components/Terminal';
-import { ActivityGrid } from './components/ActivityGrid';
-import { Services } from './components/Services';
+import { Projects } from './components/Projects';
+import { TechStack } from './components/TechStack';
 import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
-import { CommandPalette } from './components/CommandPalette';
-import { CustomCursor } from './components/CustomCursor';
 
 export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
-  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [terminalTriggerCmd, setTerminalTriggerCmd] = useState<string>('');
-  const [activeSection, setActiveSection] = useState<string>('about');
-
-  // Handle Ctrl+K / Cmd+K global hotkey
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setIsCommandPaletteOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  const [activeSection, setActiveSection] = useState<string>('hero');
 
   // Track active section for navbar
   useEffect(() => {
-    const sections = [
-      'hero',
-      'about',
-      'tech-stack',
-      'projects',
-      'experience',
-      'architecture-flow',
-      'terminal-sandbox',
-      'services',
-      'contact',
-    ];
+    const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'testimonials', 'contact'];
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -67,57 +37,33 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
-  const handleTriggerTerminalCommand = (cmd: string) => {
-    setTerminalTriggerCmd(cmd);
-  };
-
   return (
-    <div className="relative min-h-screen bg-[#08090C] text-[#F5F7FA] overflow-x-hidden">
-      {/* Custom Desktop Follow Cursor */}
-      <CustomCursor />
-
+    <div className="min-h-screen bg-[#0B0E14] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+      
       {/* Navigation */}
       <Navbar
         onOpenResume={() => setIsResumeOpen(true)}
-        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         activeSection={activeSection}
       />
 
       {/* Main Content Flow */}
       <main>
-        <Hero
-          onOpenResume={() => setIsResumeOpen(true)}
-          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
-        />
+        <Hero onOpenResume={() => setIsResumeOpen(true)} />
         <About onOpenResume={() => setIsResumeOpen(true)} />
-        <TechStack />
-        <Projects />
         <Experience />
-        <ArchitecturePlayground />
-        <Terminal
-          onOpenResume={() => setIsResumeOpen(true)}
-          externalTriggerCmd={terminalTriggerCmd}
-        />
-        <ActivityGrid />
-        <Services />
+        <Projects />
+        <TechStack />
         <Testimonials />
         <Contact />
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onOpenResume={() => setIsResumeOpen(true)} />
 
-      {/* Modals & Overlays */}
+      {/* Resume Document Viewer Modal */}
       <ResumeModal
         isOpen={isResumeOpen}
         onClose={() => setIsResumeOpen(false)}
-      />
-
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        onOpenResume={() => setIsResumeOpen(true)}
-        onTriggerTerminalCommand={handleTriggerTerminalCommand}
       />
     </div>
   );

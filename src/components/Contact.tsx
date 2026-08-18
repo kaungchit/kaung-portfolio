@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { developerProfile } from '../data/portfolioData';
-import { Mail, Phone, MapPin, Send, MessageSquare, Copy, Check, ExternalLink, Clock, ShieldCheck, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Copy, Check, ExternalLink, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    subject: 'Full-Stack Project / Opportunity',
+    subject: 'Project / Senior Role Opportunity',
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  // Timezone display
+  // Timezones
   const [times, setTimes] = useState({
     singapore: '',
     tokyo: '',
@@ -28,7 +28,6 @@ export const Contact: React.FC = () => {
           timeZone,
           hour: '2-digit',
           minute: '2-digit',
-          second: '2-digit',
           hour12: false,
         }).format(now);
 
@@ -61,88 +60,81 @@ export const Contact: React.FC = () => {
     setStatus('loading');
     setErrorMessage('');
 
-    // Simulate reliable dispatch
     setTimeout(() => {
       setStatus('success');
       setFormState({
         name: '',
         email: '',
-        subject: 'Full-Stack Project / Opportunity',
+        subject: 'Project / Senior Role Opportunity',
         message: '',
       });
-    }, 1200);
+    }, 1000);
   };
 
   return (
-    <section id="contact" className="py-24 relative bg-[#0D1015] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 bg-[#0E121A] border-t border-slate-800/80">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-cyan-400 font-mono text-sm tracking-wider font-semibold">
-            08 — GET IN TOUCH // LET'S CONNECT
+        <div className="mb-12">
+          <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest">
+            Contact
           </span>
-          <div className="h-px flex-1 bg-gradient-to-r from-cyan-500/30 via-white/10 to-transparent" />
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-1">
+            Let's Discuss Your Next Build
+          </h2>
+          <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+            Whether you are looking for a Senior Full Stack Developer, need technical guidance on FinTech API integrations, or want to discuss a new product — I look forward to connecting.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          {/* Left Column: Headline & Direct Channels */}
-          <div className="lg:col-span-5 space-y-8">
-            <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1]">
-                Have an idea? <br />
-                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                  Let's turn it into something real.
-                </span>
-              </h2>
-              <p className="text-slate-400 text-base mt-4 leading-relaxed">
-                Whether you need a Senior Full-Stack Developer for high-velocity sprint delivery, FinTech API integration, or an end-to-end web platform — I'm ready to collaborate.
-              </p>
-            </div>
-
+          {/* Left Column: Direct channels */}
+          <div className="lg:col-span-5 space-y-6">
+            
             {/* Live Regional Clocks */}
-            <div className="p-5 rounded-2xl bg-[#11151C] border border-white/10 space-y-3">
-              <div className="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-white/5 pb-2">
-                <span className="text-cyan-400 flex items-center gap-1.5">
+            <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+              <div className="flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-slate-800">
+                <span className="text-cyan-400 font-medium flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
-                  <span>REGIONAL_DISPATCH_CLOCKS</span>
+                  <span>Time Zone Overlap</span>
                 </span>
-                <span className="text-emerald-400 text-[11px]">ACTIVE</span>
+                <span className="text-emerald-400 text-[11px] font-semibold">Online & Available</span>
               </div>
 
-              <div className="grid grid-cols-3 gap-2 text-center font-mono">
-                <div className="p-2 rounded-xl bg-white/5 border border-white/5">
-                  <div className="text-[10px] text-slate-500 uppercase">Singapore</div>
+              <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+                  <div className="text-[10px] text-slate-400 uppercase">Singapore</div>
                   <div className="text-sm font-bold text-white mt-0.5">{times.singapore || '13:00'}</div>
-                  <div className="text-[9px] text-cyan-400">SGT (UTC+8)</div>
+                  <div className="text-[10px] text-cyan-400">SGT (UTC+8)</div>
                 </div>
-                <div className="p-2 rounded-xl bg-white/5 border border-white/5">
-                  <div className="text-[10px] text-slate-500 uppercase">Tokyo</div>
+                <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+                  <div className="text-[10px] text-slate-400 uppercase">Tokyo</div>
                   <div className="text-sm font-bold text-white mt-0.5">{times.tokyo || '14:00'}</div>
-                  <div className="text-[9px] text-cyan-400">JST (UTC+9)</div>
+                  <div className="text-[10px] text-cyan-400">JST (UTC+9)</div>
                 </div>
-                <div className="p-2 rounded-xl bg-white/5 border border-white/5">
-                  <div className="text-[10px] text-slate-500 uppercase">Yangon</div>
+                <div className="p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+                  <div className="text-[10px] text-slate-400 uppercase">Yangon</div>
                   <div className="text-sm font-bold text-white mt-0.5">{times.yangon || '11:30'}</div>
-                  <div className="text-[9px] text-cyan-400">MMT (UTC+6:30)</div>
+                  <div className="text-[10px] text-cyan-400">MMT (UTC+6:30)</div>
                 </div>
               </div>
             </div>
 
-            {/* Direct Contact Cards */}
+            {/* Direct Cards */}
             <div className="space-y-3">
               {/* Email */}
-              <div className="p-4 rounded-xl bg-[#11151C] border border-white/10 flex items-center justify-between group">
+              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-mono text-slate-500 uppercase">Primary Email</div>
+                    <div className="text-[11px] text-slate-400 uppercase font-medium">Email Address</div>
                     <a
                       href={`mailto:${developerProfile.socials.email}`}
-                      className="text-xs sm:text-sm font-mono text-white hover:text-cyan-300 transition-colors"
+                      className="text-xs sm:text-sm font-medium text-white hover:text-cyan-300 transition-colors"
                     >
                       {developerProfile.socials.email}
                     </a>
@@ -151,7 +143,7 @@ export const Contact: React.FC = () => {
                 <button
                   id="contact-copy-email-btn"
                   onClick={() => handleCopy(developerProfile.socials.email, 'email')}
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-cyan-300 transition-colors"
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
                   title="Copy email"
                 >
                   {copiedKey === 'email' ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -159,18 +151,18 @@ export const Contact: React.FC = () => {
               </div>
 
               {/* Phone / WhatsApp */}
-              <div className="p-4 rounded-xl bg-[#11151C] border border-white/10 flex items-center justify-between group">
+              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-mono text-slate-500 uppercase">WhatsApp / Mobile</div>
+                    <div className="text-[11px] text-slate-400 uppercase font-medium">WhatsApp / Mobile</div>
                     <a
                       href={`https://wa.me/${developerProfile.socials.whatsapp.replace(/[^0-9]/g, '')}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs sm:text-sm font-mono text-white hover:text-emerald-300 transition-colors"
+                      className="text-xs sm:text-sm font-medium text-white hover:text-emerald-400 transition-colors"
                     >
                       {developerProfile.socials.phone}
                     </a>
@@ -179,31 +171,31 @@ export const Contact: React.FC = () => {
                 <button
                   id="contact-copy-phone-btn"
                   onClick={() => handleCopy(developerProfile.socials.phone, 'phone')}
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-emerald-300 transition-colors"
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
                   title="Copy phone"
                 >
                   {copiedKey === 'phone' ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
 
-              {/* Line ID / Socials */}
+              {/* Social Links */}
               <div className="grid grid-cols-2 gap-3">
                 <a
                   href={developerProfile.socials.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="p-3 rounded-xl bg-[#11151C] border border-white/10 hover:border-cyan-500/40 text-xs font-mono text-slate-300 hover:text-cyan-300 flex items-center justify-between transition-colors"
+                  className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 text-xs text-slate-300 hover:text-cyan-300 flex items-center justify-between transition-colors"
                 >
-                  <span>LinkedIn Profile</span>
+                  <span className="font-medium">LinkedIn Profile</span>
                   <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
                 </a>
                 <a
                   href={developerProfile.socials.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="p-3 rounded-xl bg-[#11151C] border border-white/10 hover:border-cyan-500/40 text-xs font-mono text-slate-300 hover:text-cyan-300 flex items-center justify-between transition-colors"
+                  className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 text-xs text-slate-300 hover:text-cyan-300 flex items-center justify-between transition-colors"
                 >
-                  <span>GitHub Profile</span>
+                  <span className="font-medium">GitHub Profile</span>
                   <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
                 </a>
               </div>
@@ -211,32 +203,29 @@ export const Contact: React.FC = () => {
 
           </div>
 
-          {/* Right Column: Modern Developer Contact Form */}
+          {/* Right Column: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#11151C] border border-white/15 shadow-2xl space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 shadow-xl space-y-6">
               
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-3 h-3 rounded-full bg-cyan-400" />
-                  <h3 className="font-mono text-sm font-semibold text-white uppercase tracking-wider">
-                    SEND_MESSAGE // INBOX_GATEWAY
-                  </h3>
-                </div>
-                <span className="text-xs font-mono text-slate-500">256-bit encrypted</span>
+              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                <h3 className="text-base font-bold text-white">
+                  Send a Direct Message
+                </h3>
+                <span className="text-xs text-slate-400">Response within 24h</span>
               </div>
 
               {status === 'success' ? (
-                <div className="py-12 text-center space-y-4 animate-in fade-in duration-300">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center border border-emerald-500/30">
-                    <CheckCircle2 className="w-8 h-8" />
+                <div className="py-10 text-center space-y-3 animate-in fade-in duration-200">
+                  <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center border border-emerald-500/30">
+                    <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h4 className="text-xl font-bold text-white">Message Transmitted Successfully!</h4>
-                  <p className="text-sm text-slate-300 max-w-md mx-auto">
-                    Thank you for reaching out. Your message has been received by Kaung Chit San. A response will be dispatched within 24 business hours.
+                  <h4 className="text-lg font-bold text-white">Message Received!</h4>
+                  <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto">
+                    Thank you for reaching out. Kaung Chit San will get back to you promptly.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
-                    className="px-5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs"
+                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold"
                   >
                     Send Another Message
                   </button>
@@ -244,73 +233,73 @@ export const Contact: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {status === 'error' && (
-                    <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono flex items-center gap-2">
+                    <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 shrink-0" />
                       <span>{errorMessage}</span>
                     </div>
                   )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium text-slate-400">
                         Your Name *
                       </label>
                       <input
-                        id="contact-form-name"
+                        id="contact-name"
                         type="text"
                         required
                         value={formState.name}
                         onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                        placeholder="Alex Tan / Hiring Manager"
-                        className="w-full px-4 py-3 rounded-xl bg-[#08090C] border border-white/10 focus:border-cyan-400 focus:outline-none text-white text-sm font-mono placeholder:text-slate-600 transition-colors"
+                        placeholder="Alex Tan"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm placeholder:text-slate-500 transition-colors"
                       />
                     </div>
 
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium text-slate-400">
                         Your Email *
                       </label>
                       <input
-                        id="contact-form-email"
+                        id="contact-email"
                         type="email"
                         required
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         placeholder="alex@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-[#08090C] border border-white/10 focus:border-cyan-400 focus:outline-none text-white text-sm font-mono placeholder:text-slate-600 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm placeholder:text-slate-500 transition-colors"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                      Subject / Engagement Type
+                  <div className="space-y-1">
+                    <label className="text-xs font-medium text-slate-400">
+                      Subject / Topic
                     </label>
                     <select
-                      id="contact-form-subject"
+                      id="contact-subject"
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-[#08090C] border border-white/10 focus:border-cyan-400 focus:outline-none text-white text-sm font-mono transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm transition-colors"
                     >
-                      <option value="Full-Time Senior Role (Remote/Singapore/Japan)">Full-Time Senior Role (Remote/Singapore/Japan)</option>
+                      <option value="Full-Time Senior Role (Remote / Singapore / Japan)">Full-Time Senior Role (Remote / Singapore / Japan)</option>
                       <option value="Freelance / Contract Architecture">Freelance / Contract Architecture</option>
-                      <option value="FinTech & Accounting API Integration (Xero/Stripe)">FinTech & Accounting API Integration (Xero/Stripe)</option>
-                      <option value="General Engineering Inquiry">General Engineering Inquiry</option>
+                      <option value="FinTech & Accounting API Integration">FinTech & Accounting API Integration</option>
+                      <option value="General Inquiry">General Inquiry</option>
                     </select>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                      Message / Project Details *
+                  <div className="space-y-1">
+                    <label className="text-xs font-medium text-slate-400">
+                      Message *
                     </label>
                     <textarea
-                      id="contact-form-message"
+                      id="contact-message"
                       required
-                      rows={5}
+                      rows={4}
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      placeholder="Describe your project, timeline, architecture needs or role requirements..."
-                      className="w-full px-4 py-3 rounded-xl bg-[#08090C] border border-white/10 focus:border-cyan-400 focus:outline-none text-white text-sm font-mono placeholder:text-slate-600 transition-colors resize-none"
+                      placeholder="Tell me about your project, timeline, or engineering role..."
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 focus:border-cyan-400 focus:outline-none text-white text-sm placeholder:text-slate-500 transition-colors resize-none"
                     />
                   </div>
 
@@ -318,14 +307,14 @@ export const Contact: React.FC = () => {
                     id="contact-submit-btn"
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-slate-950 font-mono text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 cursor-pointer"
+                    className="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-slate-950 text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-500/20 cursor-pointer"
                   >
                     {status === 'loading' ? (
-                      <span>Transmitting Payload...</span>
+                      <span>Sending Message...</span>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        <span>Send Message Payload</span>
+                        <span>Send Message</span>
                       </>
                     )}
                   </button>

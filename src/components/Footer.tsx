@@ -1,98 +1,104 @@
 import React from 'react';
 import { developerProfile } from '../data/portfolioData';
-import { ArrowUp, Github, Linkedin, Mail, Phone, Heart, Code2 } from 'lucide-react';
+import { Download, FileText, Github, Linkedin, Mail, Phone, ArrowUp } from 'lucide-react';
+import { downloadResumePdf } from '../utils/resumeDownload';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenResume: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="bg-[#08090C] border-t border-white/10 py-12 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#080A0F] border-t border-slate-800 text-slate-400 text-xs py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-white/5">
-          {/* Brand Info */}
-          <div className="space-y-2 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xs font-mono font-bold">
-                KC
-              </div>
-              <span className="font-mono text-base font-bold text-white tracking-wider">
-                {developerProfile.name.toUpperCase()}
-              </span>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-800/80">
+          {/* Brand */}
+          <div className="text-center md:text-left space-y-1">
+            <div className="font-bold text-white text-base">
+              {developerProfile.name}
             </div>
-            <p className="text-xs text-slate-400 font-mono">
-              {developerProfile.title} • Clean Architecture, High-Throughput APIs & Cloud Solutions
+            <p className="text-slate-400 text-xs">
+              Senior Full Stack Developer • Singapore, Japan & Global Remote
             </p>
           </div>
 
-          {/* Social Links */}
+          {/* Quick links & Resume triggers */}
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
+            <a href="#about" className="hover:text-cyan-300 transition-colors">About</a>
+            <a href="#experience" className="hover:text-cyan-300 transition-colors">Experience</a>
+            <a href="#projects" className="hover:text-cyan-300 transition-colors">Projects</a>
+            <a href="#skills" className="hover:text-cyan-300 transition-colors">Skills</a>
+            <a href="#contact" className="hover:text-cyan-300 transition-colors">Contact</a>
+            
+            <span className="text-slate-700 hidden sm:inline">•</span>
+
+            <button
+              id="footer-download-resume-btn"
+              onClick={downloadResumePdf}
+              className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1 cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Download Resume (PDF)</span>
+            </button>
+
+            <button
+              id="footer-view-cv-btn"
+              onClick={onOpenResume}
+              className="text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>View CV</span>
+            </button>
+          </div>
+
+          {/* Social Icons & Back to top */}
           <div className="flex items-center gap-3">
             <a
-              id="footer-github-link"
               href={developerProfile.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 text-slate-400 hover:text-cyan-300 transition-colors"
+              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-cyan-300 transition-colors"
               aria-label="GitHub"
             >
               <Github className="w-4 h-4" />
             </a>
             <a
-              id="footer-linkedin-link"
               href={developerProfile.socials.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 text-slate-400 hover:text-cyan-300 transition-colors"
+              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-cyan-300 transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
             </a>
             <a
-              id="footer-email-link"
               href={`mailto:${developerProfile.socials.email}`}
-              className="p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 text-slate-400 hover:text-cyan-300 transition-colors"
+              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-cyan-300 transition-colors"
               aria-label="Email"
             >
               <Mail className="w-4 h-4" />
             </a>
-            <a
-              id="footer-whatsapp-link"
-              href={`https://wa.me/${developerProfile.socials.whatsapp.replace(/[^0-9]/g, '')}`}
-              target="_blank"
-              rel="noreferrer"
-              className="p-2.5 rounded-xl bg-white/5 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-400/40 text-slate-400 hover:text-emerald-300 transition-colors"
-              aria-label="WhatsApp"
+            <button
+              onClick={scrollToTop}
+              className="p-2 rounded-lg bg-slate-900 hover:bg-cyan-500/20 text-slate-400 hover:text-cyan-300 transition-colors ml-2 cursor-pointer"
+              title="Scroll to top"
             >
-              <Phone className="w-4 h-4" />
-            </a>
+              <ArrowUp className="w-4 h-4" />
+            </button>
           </div>
-
-          {/* Back to top */}
-          <button
-            id="footer-back-to-top"
-            onClick={scrollToTop}
-            className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors"
-          >
-            <span>TOP</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
         </div>
 
-        {/* Bottom meta */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-slate-400">SYSTEM ONLINE // ALL SERVERS OPERATIONAL</span>
-          </div>
-
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px]">
           <div>
-            Built with <span className="text-slate-300">React • TypeScript • Tailwind</span>
+            © {new Date().getFullYear()} {developerProfile.name}. All rights reserved.
           </div>
-
           <div>
-            © 2026 {developerProfile.name}. All rights reserved.
+            Crafted with React, TypeScript & Tailwind CSS • Built for performance & clean architecture
           </div>
         </div>
 
